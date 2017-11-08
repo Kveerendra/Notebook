@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-6"> </div>
+    <div class="col-4 ">
+      <label class="checkbox-inline float-right">
+        <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
+
+    </div>
+    <div class="col-2 ">
+      <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddcontact()" value="Add contact">Add Contact</button>
+    </div>
+
+
+
+  </div>
+
+  <div>
+    <ul class="list-group">
+      <li *ngFor="let contact of contacts" class="list-group-item">
+        <div class="row">
+          <div class="col-10">
+            <app-contact [contact]="contact"></app-contact>
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteContact(contact)" value="Delete contact">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="hidden-sm-down">  Delete</span>
+            </button>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+
+-
