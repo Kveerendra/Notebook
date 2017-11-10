@@ -3,13 +3,11 @@ import {ContactsService} from '../../services/contacts.service';
 import {Contact} from '../../model/contact';
 import {FormsModule} from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import {ContactModelComponent} from './contact-model/contact-model.component';
 @Component({
   selector: 'app-contacts-page',
   templateUrl: './contacts-page.component.html',
   styleUrls: ['./contacts-page.component.css'],
-  providers: [ContactsService],
-  entryComponents : [ContactModelComponent]
+  providers: [ContactsService]
 })
 export class ContactsPageComponent implements OnInit {
   contacts: Contact[];
@@ -49,7 +47,7 @@ export class ContactsPageComponent implements OnInit {
   deleteMultiple() {
     console.log(this.delMul);
   }
-
+/*
   openAddContact() {
     const modalRef = this.modalService.open(ContactModelComponent);
     const Contact1: Contact = new Contact('', 0, 0);
@@ -63,7 +61,7 @@ export class ContactsPageComponent implements OnInit {
     contact1._id = this.contacts.length;
     modalRef.componentInstance.contact = contact1;
     modalRef.result.then((contact: Contact) => { this.getContacts(); });
-  }
+  }*/
 
   deleteContact(contact: Contact) {
     this.contactService.deleteContact(contact._id + '').subscribe((res: any) => {

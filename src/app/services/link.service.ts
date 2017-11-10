@@ -15,10 +15,13 @@ export class LinkService {
     return this.http.get(this.url + '/' +  id, { headers: this.headers}).map(function (response) { return response.json(); });
   }
   addLink(link: Link) {
+    link.description = link.description ? link.description : '-';
+    link.displayText = link.displayText ? link.displayText : '-';
+    link.tooltipText = link.tooltipText ? link.tooltipText : '-';
       return this.http.post(this.url, link, { headers: this.headers }).map(function (response) { return response.json(); });
   }
   updateLink(link: Link) {
-    console.log(link);
+
     return this.http.put(this.url + '/' + link._id, link,
     { headers: this.headers }).map(function (response) { return response.json(); });
   }

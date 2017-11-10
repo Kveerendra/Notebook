@@ -6,7 +6,7 @@
 
   </div>
   <div class="col-2 ">
-    <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddLink()" value="Add Link">Add Link</button>
+    <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
   </div>
 
 
@@ -22,8 +22,8 @@
         </div>
         <div class="col-2">
           <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteLink(link)" value="Delete Link">
-              <i class="fa fa-times" aria-hidden="true"></i>
-          <span class="hidden-sm-down">  Delete</span>
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="hidden-sm-down"> Delete</span>
           </button>
 
         </div>
@@ -33,4 +33,29 @@
 
 </div>
 
+<ng-template #linkModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text" class="form-control" id="url" [(ngModel)]="link.link" placeholder="Enter url">
 
+      </div>
+      <div class="form-group">
+        <label for="urldisplaytext">URL Display text</label>
+        <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="link.displayText" placeholder="Enter url display text">
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveLink();c('Close click')">Add Link</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

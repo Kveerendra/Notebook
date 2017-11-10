@@ -4,19 +4,19 @@ import { NgModel } from '@angular/forms';
 
 import { LinkService } from '../../services/link.service';
 import { Link } from '../../model/Link';
-import { LinkModelComponent } from './link-model/link-model.component';
 
 
 @Component({
   selector: 'app-links-page',
   templateUrl: './links-page.component.html',
   styleUrls: ['./links-page.component.css'],
-  providers: [LinkService],
-  entryComponents : [LinkModelComponent]
+  providers: [LinkService]
+
 })
 export class LinksPageComponent implements OnInit {
   links: Array<Link> = new Array<Link>();
   delMul = false;
+  editFlag = false;
   closeResult: string;
   link: Link = {
     _id: -1,
@@ -27,12 +27,14 @@ export class LinksPageComponent implements OnInit {
   };
   constructor(private linkService: LinkService, private modalService: NgbModal) {
   }
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  openAddLink(content) {
+    this.editFlag = false;
+    this.modalService.open(content);
+  }
+  openEditLink(link: Link, content) {
+    this.link = link;
+    this.editFlag = false;
+    this.modalService.open(content);
   }
 
   private getDismissReason(reason: any): string {
@@ -53,18 +55,25 @@ export class LinksPageComponent implements OnInit {
 
   ngOnInit() {
     this.getLinks();
-  }
+  }/*
   openAddLink() {
     const modalRef = this.modalService.open(LinkModelComponent);
     const link1: Link = new Link('', '', '', '');
     link1._id = this.links.length;
     modalRef.componentInstance.link = link1;
     modalRef.result.then((link: Link) => { this.getLinks(); });
-  }
+  }*/
   deleteMultiple() {
     console.log(this.delMul);
   }
-
+  addLink(linkModal) {
+    console.log('in model component ' + JSON.stringify(this.link));
+    this.link._id = this.links.length + 1;
+    this.linkService.addLink(this.link).subscribe((res: Link) => {
+      this.getLinks();
+    });
+  }
+/*
   editLink(link: Link) {
     const modalRef = this.modalService.open(LinkModelComponent);
     const link1: Link = link;
@@ -72,10 +81,21 @@ export class LinksPageComponent implements OnInit {
     modalRef.componentInstance.link = link1;
     modalRef.result.then((link: Link) => { this.getLinks(); });
   }
-
+*/
   deleteLink(link: Link) {
     this.linkService.deleteLink(link._id + '').subscribe((res: any) => {
       this.getLinks();
     });
+  }
+  saveLink() {
+    if (this.editFlag) {
+      this.linkService.updateLink(this.link).subscribe((res: Link) => {
+        this.getLinks();
+      });
+    } else {
+      this.linkService.addLink(this.link).subscribe((res: Link) => {
+        this.getLinks();
+      });
+    }
   }
 }

@@ -18,8 +18,6 @@ import { ContactsService } from './services/contacts.service';
 import { LinkService } from './services/link.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { LinkModelComponent } from './pages/links-page/link-model/link-model.component';
-import { ContactModelComponent } from './pages/contacts-page/contact-model/contact-model.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +29,7 @@ import { ContactModelComponent } from './pages/contacts-page/contact-model/conta
     FooterComponent,
     LinksPageComponent,
     ErrorPageComponent,
-    ContactsPageComponent,
-    LinkModelComponent,
-    ContactModelComponent
+    ContactsPageComponent
   ],
   imports: [
     BrowserModule,
