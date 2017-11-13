@@ -1,13 +1,12 @@
-<div class="row">
-  <div class="col-6"> </div>
-  <div class="col-4 ">
-    <label class="checkbox-inline float-right">
-      <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
-
+<div class="row flex">
+  
+  <div class="col-6 ">
+    <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
   </div>
-  <div class="col-2 ">
-    <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
-  </div>
+  <div class="col-6 ">
+      <label class="checkbox-inline float-right">
+        <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
+    </div>
 
 
 
