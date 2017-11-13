@@ -18,6 +18,7 @@ import { ContactsService } from './services/contacts.service';
 import { LinkService } from './services/link.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpModule,
     NgbModule.forRoot(),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [ContactsService, LinkService],
   bootstrap: [AppComponent]

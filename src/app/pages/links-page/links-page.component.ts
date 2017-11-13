@@ -14,7 +14,7 @@ import { Link } from '../../model/Link';
 
 })
 export class LinksPageComponent implements OnInit {
-  links: Array<Link> = new Array<Link>();
+  links: Link[];
   delMul = false;
   editFlag = false;
   closeResult: string;
@@ -48,9 +48,9 @@ export class LinksPageComponent implements OnInit {
   }
 
   getLinks() {
-    this.linkService.getLinks().subscribe((res: Link[]) => {
-      this.links = res;
-    });
+    this.linkService.getLinks().then((data: Link[]) => { console.log(JSON.stringify(data));
+      this.links = data;
+     });
   }
 
   ngOnInit() {
@@ -66,14 +66,15 @@ export class LinksPageComponent implements OnInit {
   deleteMultiple() {
     console.log(this.delMul);
   }
+  /*
   addLink(linkModal) {
-    console.log('in model component ' + JSON.stringify(this.link));
     this.link._id = this.links.length + 1;
+    console.log('in model node  ' + JSON.stringify(this.link));
     this.linkService.addLink(this.link).subscribe((res: Link) => {
       this.getLinks();
     });
   }
-/*
+
   editLink(link: Link) {
     const modalRef = this.modalService.open(LinkModelComponent);
     const link1: Link = link;
@@ -83,17 +84,19 @@ export class LinksPageComponent implements OnInit {
   }
 */
   deleteLink(link: Link) {
-    this.linkService.deleteLink(link._id + '').subscribe((res: any) => {
+    console.log(link);
+    this.linkService.deleteLink(link._id + '').then((res: any) => {
       this.getLinks();
     });
   }
   saveLink() {
     if (this.editFlag) {
-      this.linkService.updateLink(this.link).subscribe((res: Link) => {
+      this.linkService.updateLink(this.link).then((res: Link) => {
         this.getLinks();
       });
     } else {
-      this.linkService.addLink(this.link).subscribe((res: Link) => {
+      this.link._id = this.links.length + 1;
+      this.linkService.addLink(this.link).then((res: Link) => {
         this.getLinks();
       });
     }
