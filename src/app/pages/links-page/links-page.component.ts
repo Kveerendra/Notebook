@@ -14,7 +14,7 @@ import { Link } from '../../model/Link';
 
 })
 export class LinksPageComponent implements OnInit {
-  links: Array<Link> = new Array<Link>();
+  links: Link[];
   delMul = false;
   editFlag = false;
   closeResult: string;
@@ -48,9 +48,9 @@ export class LinksPageComponent implements OnInit {
   }
 
   getLinks() {
-    this.linkService.getLinks().subscribe((res: Link[]) => {
-      this.links = res;
-    });
+    this.linkService.getLinks().then((data:Link[]) => { console.log(JSON.stringify(data));
+      this.links = data;
+     });
   }
 
   ngOnInit() {
@@ -66,14 +66,15 @@ export class LinksPageComponent implements OnInit {
   deleteMultiple() {
     console.log(this.delMul);
   }
+  /*
   addLink(linkModal) {
-    console.log('in model component ' + JSON.stringify(this.link));
     this.link._id = this.links.length + 1;
+    console.log('in model node  ' + JSON.stringify(this.link));
     this.linkService.addLink(this.link).subscribe((res: Link) => {
       this.getLinks();
     });
   }
-/*
+
   editLink(link: Link) {
     const modalRef = this.modalService.open(LinkModelComponent);
     const link1: Link = link;
@@ -93,6 +94,7 @@ export class LinksPageComponent implements OnInit {
         this.getLinks();
       });
     } else {
+      this.link._id = this.links.length + 1;
       this.linkService.addLink(this.link).subscribe((res: Link) => {
         this.getLinks();
       });
