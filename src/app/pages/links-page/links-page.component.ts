@@ -48,7 +48,7 @@ export class LinksPageComponent implements OnInit {
   }
 
   getLinks() {
-    this.linkService.getLinks().then((data:Link[]) => { console.log(JSON.stringify(data));
+    this.linkService.getLinks().then((data: Link[]) => { console.log(JSON.stringify(data));
       this.links = data;
      });
   }
@@ -84,18 +84,19 @@ export class LinksPageComponent implements OnInit {
   }
 */
   deleteLink(link: Link) {
-    this.linkService.deleteLink(link._id + '').subscribe((res: any) => {
+    console.log(link);
+    this.linkService.deleteLink(link._id + '').then((res: any) => {
       this.getLinks();
     });
   }
   saveLink() {
     if (this.editFlag) {
-      this.linkService.updateLink(this.link).subscribe((res: Link) => {
+      this.linkService.updateLink(this.link).then((res: Link) => {
         this.getLinks();
       });
     } else {
       this.link._id = this.links.length + 1;
-      this.linkService.addLink(this.link).subscribe((res: Link) => {
+      this.linkService.addLink(this.link).then((res: Link) => {
         this.getLinks();
       });
     }
