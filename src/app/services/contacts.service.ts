@@ -8,39 +8,38 @@ export class ContactsService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
   getContacts() {
-    return new Promise(resolve => {  
+    return new Promise(resolve => {
     this.http.get<Contact[]>(this.url).subscribe((data: Contact[]) => {resolve(data); }, err => {console.log(err); });
   });
   }
-  getContact(id: string) {   
+  getContact(id: string) {
     return new Promise(resolve => {
       this.http.get<Contact>(this.url + '/' +  id).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
      });
   }
-  //addContact(contact: Contact) {
-   // return this.http.post("ContactApi/Contact", JSON.stringify(contact), { headers: this.headers }).map(function (response) { return response.json(); });
-  //}
+
   addContact(contact: Contact) {
-    //contact._id = contact._id ? contact._id : -4;
     contact.displayName = contact.displayName ? contact.displayName : '-';
     contact.voipNum = contact.voipNum ? contact.voipNum : 0;
     contact.skypeNum = contact.skypeNum ? contact.skypeNum : 0;
-    contact.contactName = contact.contactName ? contact.contactName : '-';  
+    contact.contactName = contact.contactName ? contact.contactName : '-';
     console.log(JSON.stringify(contact)) ;
      return new Promise(resolve => {
-      this.http.post<Contact>(this.url, Contact).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+      this.http.post<Contact>(this.url, contact).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
      });
   }
 
-  updateContact(contact: Contact) {    
+  updateContact(contact: Contact) {
     return new Promise(resolve => {
-      this.http.put<Contact>(this.url + '/' + contact._id, contact).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+      this.http.put<Contact>(this.url + '/' + contact._id, contact).subscribe(
+        (data: Contact) => {resolve(data); }, err => {console.log(err); }
+      );
      });
   }
-  deleteContact(id: string) {    
+  deleteContact(id: string) {
     return new Promise(resolve => {
       this.http.delete<Contact>(this.url + '/' + id).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
      });
   }
- 
+
 }

@@ -12,10 +12,10 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
   }
-  /*
-  editLink() {
-    const modalRef = this.modalService.open(ContactsModalComponent);
+
+  editContact(contactModel) {
+    const modalRef = this.modalService.open(contactModel);
     const contact1: Contact = this.contact;
     modalRef.componentInstance.contact = contact1;
-  }*/
+  }
 }
