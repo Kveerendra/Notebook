@@ -3,6 +3,7 @@ import {ContactsService} from '../../services/contacts.service';
 import {Contact} from '../../model/contact';
 import {FormsModule} from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-contacts-page',
   templateUrl: './contacts-page.component.html',
@@ -11,13 +12,18 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ContactsPageComponent implements OnInit {
   contacts: Contact[];
-  contact: Contact;
+ // contact: Contact;
   closeResult: string;
   delMul = false;
+  contact: Contact = {
+    _id: -1,
+    displayName: '',
+    voipNum: 1,
+    skypeNum: 1,
+    contactName: ''    
+  };
   constructor(private contactService: ContactsService, private modalService: NgbModal) { }
-
-
-  open(content) {
+  openAddcontact(content) {    
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -36,7 +42,7 @@ export class ContactsPageComponent implements OnInit {
   }
 
   getContacts() {
-    this.contactService.getContacts().subscribe((res: Contact[]) => {
+    this.contactService.getContacts().then((res: Contact[]) => {
       this.contacts = res;
     });
   }
@@ -63,9 +69,18 @@ export class ContactsPageComponent implements OnInit {
     modalRef.result.then((contact: Contact) => { this.getContacts(); });
   }*/
 
+
   deleteContact(contact: Contact) {
-    this.contactService.deleteContact(contact._id + '').subscribe((res: any) => {
+    console.log(contact);
+    this.contactService.deleteContact(contact._id + '').then((res: Contact) => {
       this.getContacts();
     });
   }
+  
+  saveContact(){
+    this.contactService.addContact(this.contact).then((res: Contact) => {
+      this.getContacts();
+    });
+    }
+
 }

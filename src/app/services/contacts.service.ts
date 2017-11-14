@@ -1,25 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Contact } from '../model/contact';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ContactsService {
+  private url = 'http://localhost:3000/ContactApi/contact';
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
   getContacts() {
-    return this.http.get("ContactApi/Contact", { headers: this.headers }).map(function (response) { return response.json(); });
+    return new Promise(resolve => {  
+    this.http.get<Contact[]>(this.url).subscribe((data: Contact[]) => {resolve(data); }, err => {console.log(err); });
+  });
   }
-  getContact(id: string) {
-    return this.http.get("ContactApi/Contact", { headers: this.headers, params: { id: id } }).map(function (response) { return response.json(); });
+  getContact(id: string) {   
+    return new Promise(resolve => {
+      this.http.get<Contact>(this.url + '/' +  id).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+     });
   }
+  //addContact(contact: Contact) {
+   // return this.http.post("ContactApi/Contact", JSON.stringify(contact), { headers: this.headers }).map(function (response) { return response.json(); });
+  //}
   addContact(contact: Contact) {
-    return this.http.post("ContactApi/Contact", JSON.stringify(contact), { headers: this.headers }).map(function (response) { return response.json(); });
+    //contact._id = contact._id ? contact._id : -4;
+    contact.displayName = contact.displayName ? contact.displayName : '-';
+    contact.voipNum = contact.voipNum ? contact.voipNum : 0;
+    contact.skypeNum = contact.skypeNum ? contact.skypeNum : 0;
+    contact.contactName = contact.contactName ? contact.contactName : '-';  
+    console.log(JSON.stringify(contact)) ;
+     return new Promise(resolve => {
+      this.http.post<Contact>(this.url, Contact).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+     });
   }
-  updateContact(contact: Contact) {
-    return this.http.put("ContactApi/Contact", JSON.stringify(contact), { headers: this.headers }).map(function (response) { return response.json(); });
+
+  updateContact(contact: Contact) {    
+    return new Promise(resolve => {
+      this.http.put<Contact>(this.url + '/' + contact._id, contact).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+     });
   }
-  deleteContact(id: string) {
-    return this.http.delete("ContactApi/Contact", { headers: this.headers, params: { id: id } }).map(function (response) { return response.json(); });
+  deleteContact(id: string) {    
+    return new Promise(resolve => {
+      this.http.delete<Contact>(this.url + '/' + id).subscribe((data: Contact) => {resolve(data); }, err => {console.log(err); });
+     });
   }
+ 
 }
