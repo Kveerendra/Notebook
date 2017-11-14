@@ -6,7 +6,7 @@
 
     </div>
     <div class="col-2 ">
-      <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddcontact()" value="Add contact">Add Contact</button>
+      <button type="button" class="btn btn-primary btn-sm-block float-right" (click)="openAddcontact(contactModel)" value="Add contact">Add Contact</button>
     </div>
 
 
@@ -15,13 +15,13 @@
 
   <div>
     <ul class="list-group">
-      <li *ngFor="let contact of contacts" class="list-group-item">
+      <li *ngFor="let l of contacts" class="list-group-item">
         <div class="row">
           <div class="col-10">
-            <app-contact [contact]="contact"></app-contact>
+            <app-contact [contact]="l"></app-contact>
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteContact(contact)" value="Delete contact">
+            <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteContact(l)" value="Delete contact">
                 <i class="fa fa-times" aria-hidden="true"></i>
             <span class="hidden-sm-down">  Delete</span>
             </button>
@@ -45,19 +45,19 @@
   <div class="modal-body">
     <div>
       <div class="form-group">
-        <label for="url">URL</label>
-        <input type="text" class="form-control" id="url" [(ngModel)]="link.link" placeholder="Enter url">
+        <label for="url">Contact Name</label>
+        <input type="text" class="form-control" id="url" [(ngModel)]="contact.contactName" placeholder="Enter ContactName">
 
       </div>
       <div class="form-group">
-        <label for="urldisplaytext">URL Display text</label>
-        <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="link.displayText" placeholder="Enter url display text">
+        <label for="urldisplaytext">Contact Display text</label>
+        <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="contact.displayName" placeholder="Enter contact display text">
 
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="addLink()">Add Link</button>
+    <button type="button" class="btn btn-success" (click)="saveContact();c('Close click')">Add Contact</button>
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>

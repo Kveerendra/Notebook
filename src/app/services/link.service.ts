@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class LinkService {
   private url = 'http://localhost:3000/LinkApi/link';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  //private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private httpc: HttpClient) { }
   getLinks() {
     return new Promise(resolve => {
@@ -18,6 +18,7 @@ export class LinkService {
      });
   }
   addLink(link: Link) {
+    console.log(link);
     link.description = link.description ? link.description : '-';
     link.displayText = link.displayText ? link.displayText : '-';
     link.tooltipText = link.tooltipText ? link.tooltipText : '-';

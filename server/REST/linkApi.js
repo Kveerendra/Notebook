@@ -15,7 +15,6 @@ app.use(methodOverride());
 mongoose.connect('mongodb://localhost:27017/Notebook');
 
 var Resource = app.resource = restful.model('link', mongoose.Schema({
-
         _id: Number,
         link: String,
         description: String,

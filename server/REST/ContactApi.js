@@ -14,14 +14,15 @@ app.use(methodOverride());
 
 mongoose.connect('mongodb://localhost:27017/Notebook');
 
-var Resource = app.resource = restful.model('Contact', mongoose.Schema({
+var Resource = app.resource = restful.model('contact', mongoose.Schema({
         _id: Number,
+        contactName: String, 
         displayName: String,
         voipNum: String,
         skypeNum: String
     }))
     .methods(['get', 'post', 'put', 'delete']);
 
-Resource.register(app, '/Contact'); //collections Name
+Resource.register(app, '/contact'); //collections Name
 
 module.exports = app;
