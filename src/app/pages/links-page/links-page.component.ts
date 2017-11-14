@@ -33,7 +33,7 @@ export class LinksPageComponent implements OnInit {
   }
   openEditLink(link: Link, content) {
     this.link = link;
-    this.editFlag = false;
+    this.editFlag = true;
     this.modalService.open(content);
   }
 
@@ -95,6 +95,9 @@ export class LinksPageComponent implements OnInit {
         this.getLinks();
       });
     } else {
+      if (this.links === undefined) {
+        this.links = new Link[0];
+      }
       this.link._id = this.links.length + 1;
       this.linkService.addLink(this.link).then((res: Link) => {
         this.getLinks();
