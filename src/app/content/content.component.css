@@ -1,0 +1,22 @@
+.headertext {
+    text-align: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 10005;
+    /*padding-top: 4em;*/
+    font-size: 3.5em;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1em;
+    margin: 0 0 1em 0;
+    padding: 0;
+}
+body {
+    background: rgba(75, 75, 93, 0.85);
+}
+.container {
+    background: rgba(75, 75, 93, 0.85);
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0px !important;
+}

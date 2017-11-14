@@ -1,10 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="/">ENB</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <header id="header">
+    <div class="inner">
+        <a href="#" class="logo"><strong>Deloitte</strong></a>
+        <nav id="nav">
+            <a href="#">Home</a>
+            <a class="nav-link" routerLink="/link" routerLinkActive="active">Links</a>
+            <a class="nav-link" routerLink="/Contacts">Contacts</a>
+        </nav>
+    </div>
+</header>
+
+    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/link" routerLinkActive="active">Links</a>
@@ -18,5 +25,5 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-    </div>
+    </div>-->
 </nav>
