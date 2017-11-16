@@ -18,7 +18,7 @@
       <li *ngFor="let l of contacts" class="list-group-item">
         <div class="row">
           <div class="col-10">
-            <app-contact [contact]="l"></app-contact>
+            <app-contact [contact]="l" (edit)="openEditContact(l,contactModel)"></app-contact>
           </div>
           <div class="col-2">
             <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteContact(l)" value="Delete contact">

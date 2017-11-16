@@ -4,6 +4,7 @@ import { Contact } from "../../model/contact";
 import { FormsModule } from "@angular/forms";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
+
 @Component({
   selector: "app-contacts-page",
   templateUrl: "./contacts-page.component.html",
@@ -15,6 +16,7 @@ export class ContactsPageComponent implements OnInit {
   // contact: Contact;
   closeResult: string;
   delMul = false;
+  editFlag = false;
   contact: Contact = {
     _id: -1,
     displayName: '',
@@ -35,6 +37,12 @@ export class ContactsPageComponent implements OnInit {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
+  }
+
+  openEditContact(contact: Contact, content) {
+    this.contact = contact;
+    this.editFlag = true;
+    this.modalService.open(content);
   }
 
   private getDismissReason(reason: any): string {
@@ -83,6 +91,12 @@ export class ContactsPageComponent implements OnInit {
   }
 
   saveContact() {
+    if (this.editFlag) {
+      this.contactService.updateContact(this.contact).then((res: Contact) => {
+        this.getContacts();
+      });
+    }
+    else{
     if (this.contacts === undefined) {
       this.contacts = new Contact[0]();
     }
@@ -91,4 +105,5 @@ export class ContactsPageComponent implements OnInit {
       this.getContacts();
     });
   }
+}
 }
