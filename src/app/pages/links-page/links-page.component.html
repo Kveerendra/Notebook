@@ -1,60 +1,61 @@
 <div class="row flex">
-
-  <div class="col-6 ">
-    <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
-  </div>
-  <div class="col-6 ">
-      <label class="checkbox-inline right">
-        <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
-    </div>
-
-
-
-</div>
-
-<div>
-  <ul class="list-group">
-    <li *ngFor="let l of links" class="list-group-item">
-      <div class="row">
-        <div class="col-10">
-          <app-link [link]="l" (edit)="openEditLink(l,linkModal)"></app-link>
-        </div>
-        <div class="col-2">
-          <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteLink(l)" value="Delete Link">
-            <i class="fa fa-times" aria-hidden="true"></i>
-            <span class="hidden-sm-down"> Delete</span>
-          </button>
-
-        </div>
+    
+      <div class="col-6 ">
+        <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
       </div>
-    </li>
-  </ul>
-
-</div>
-
-<ng-template #linkModal let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+      <div class="col-6 ">
+          <label class="checkbox-inline right button">
+            <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
+        </div>
+    
+    
+    
+    </div>
+    
     <div>
-      <div class="form-group">
-        <label for="url">URL</label>
-        <input type="text" class="form-control" id="url" [(ngModel)]="link.link" placeholder="Enter url">
-
-      </div>
-      <div class="form-group">
-        <label for="urldisplaytext">URL Display text</label>
-        <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="link.displayText" placeholder="Enter url display text">
-
-      </div>
+      <ul class="list-group">
+        <li *ngFor="let l of links" class="list-group-item">
+          <div class="row">
+            <div class="col-10">
+              <app-link [link]="l" (edit)="openEditLink(l,linkModal)"></app-link>
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteLink(l)" value="Delete Link">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <span class="hidden-sm-down"> Delete</span>
+              </button>
+    
+            </div>
+          </div>
+        </li>
+      </ul>
+    
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="saveLink();c('Close click')">Add Link</button>
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-  </div>
-</ng-template>
+    
+    <ng-template #linkModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="text" class="form-control" id="url" [(ngModel)]="link.link" placeholder="Enter url">
+    
+          </div>
+          <div class="form-group">
+            <label for="urldisplaytext">URL Display text</label>
+            <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="link.displayText" placeholder="Enter url display text">
+    
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="saveLink();c('Close click')">Add Link</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+      </div>
+    </ng-template>
+    
