@@ -1,22 +1,24 @@
-.headertext {
+.section-menu {
     text-align: center;
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    z-index: 10005;
-    /*padding-top: 4em;*/
-    font-size: 3.5em;
-    font-weight: 400;
+    width: 66%;
+    margin: auto;
+    font-size: 1rem;
+}
+ li{
+    display: inline-block;
+    text-decoration: none;
+    padding-right: 55px;
+}
+a {
     color: #fff;
-    line-height: 1em;
-    margin: 0 0 1em 0;
-    padding: 25px;
 }
-body {
-    background: rgba(75, 75, 93, 0.85);
+.footer {
+    left: 0;
+    right: 0;
+    bottom: 1px;
+    background-color: #191919;
+    padding: 10px 0;
 }
-.container {
-    background: rgba(75, 75, 93, 0.85);
-    width: 100%;
-    max-width: 100%;
-    margin-top: 0px !important;
+ul{
+    padding: 0 0 0 40px;
 }
