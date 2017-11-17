@@ -2,7 +2,7 @@
     text-align: center;
     border-top: 2px solid rgba(255, 255, 255, 0.2);
     position: relative;
-    z-index: 10005;
+   /* z-index: 10005;*/
     /*padding-top: 4em;*/
     font-size: 3.5em;
     font-weight: 400;
