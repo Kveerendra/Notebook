@@ -20,6 +20,10 @@ import { LinkService } from './services/link.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 
+import { ContactFilterPipe } from './pipes/contact-filter.pipe';
+import { LinkFilterPipe } from './pipes/link-filter.pipe';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,9 @@ import {HttpClientModule} from '@angular/common/http';
     FooterComponent,
     LinksPageComponent,
     ErrorPageComponent,
-    ContactsPageComponent
+    ContactsPageComponent,
+    ContactFilterPipe,
+    LinkFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgModel } from '@angular/forms';
 
 import { LinkService } from '../../services/link.service';
 import { Link } from '../../model/Link';
+import {LinkFilterPipe} from '../../pipes/link-filter.pipe';
 
 
 @Component({
@@ -11,13 +12,14 @@ import { Link } from '../../model/Link';
   templateUrl: './links-page.component.html',
   styleUrls: ['./links-page.component.css'],
   providers: [LinkService]
-
 })
 export class LinksPageComponent implements OnInit {
   links: Link[];
+  filteredItems: Link[];
   delMul = false;
   editFlag = false;
   closeResult: string;
+  userFilter: string;
   link: Link = {
     _id: -1,
     link: '',
@@ -25,6 +27,8 @@ export class LinksPageComponent implements OnInit {
     description: '',
     tooltipText: ''
   };
+  deleteMultipleList: {};
+  delMulFlag= false;
   constructor(private linkService: LinkService, private modalService: NgbModal) {
   }
   openAddLink(content) {
@@ -50,9 +54,13 @@ export class LinksPageComponent implements OnInit {
   getLinks() {
     this.linkService.getLinks().then((data: Link[]) => { console.log(JSON.stringify(data));
       this.links = data;
+
      });
   }
-
+  selectLink(val: boolean, link: Link) {
+    console.log( 'value is ' + val);
+    this.deleteMultipleList[link._id] = val;
+  }
   ngOnInit() {
     this.getLinks();
   }/*
@@ -103,5 +111,11 @@ export class LinksPageComponent implements OnInit {
         this.getLinks();
       });
     }
+  }
+  filterItem(searchString) {
+    if (!searchString) {this.filteredItems = this.links; } //when nothing has typed
+    this.filteredItems = Object.assign([], this.links).filter(
+       link => link.displayText.toLowerCase().indexOf(searchString.toLowerCase()) > -1
+    );
   }
 }
