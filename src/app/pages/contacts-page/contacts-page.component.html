@@ -1,58 +1,54 @@
 <div class="row flex">
-    <div class="col-6">
-      <label class="checkbox-inline button">
-        <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
-    </div>
-    <div class="col-6">
-      <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddcontact(contactModel)" value="Add contact">Add Contact</button>
-    </div>
+  <div class="col-6">
+    <label class="checkbox-inline button">
+      <input type="checkbox" [checked]="delMul" (change)="delMul=!delMul">Delete Multiple</label>
   </div>
+  <div class="col-6">
+    <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddcontact(contactModel)" value="Add contact">Add Contact</button>
+  </div>
+</div>
 
-  <div>
-    <ul class="list-group">
-      <li *ngFor="let l of contacts" class="list-group-item">
-        <div class="row">
-          <div class="col-10">
-            <app-contact [contact]="l" (edit)="openEditContact(l,contactModel)"></app-contact>
-          </div>
-          <div class="col-2">
-            <button type="button" class="btn btn-danger btn-sm-block float-right" (click)="deleteContact(l)" value="Delete contact">
-                <i class="fa fa-times" aria-hidden="true"></i>
-            <span class="hidden-sm-down">  Delete</span>
-            </button>
-
-          </div>
+<div class="">
+  <ul class="list-group flex" style="display:flex;flex-direction:row">
+    <li *ngFor="let l of contacts" class="list-group-item col-4">
+      <div class="">
+        <div class="">
+          <app-contact [contact]="l" (edit)="openEditContact(l,contactModel)"></app-contact>
         </div>
-      </li>
-    </ul>
+        <div class="col-2">
+          
 
-  </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+</div>
 
 -
 <ng-template #contactModel let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="form-group">
-        <label for="url">Contact Name</label>
-        <input type="text" class="form-control" id="url" [(ngModel)]="contact.contactName" placeholder="Enter ContactName">
+<div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+  <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div>
+    <div class="form-group">
+      <label for="url">Contact Name</label>
+      <input type="text" class="form-control" id="url" [(ngModel)]="contact.contactName" placeholder="Enter ContactName">
 
-      </div>
-      <div class="form-group">
-        <label for="urldisplaytext">Contact Display text</label>
-        <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="contact.displayName" placeholder="Enter contact display text">
+    </div>
+    <div class="form-group">
+      <label for="urldisplaytext">Contact Display text</label>
+      <input type="text" class="form-control" id="urldisplaytext" [(ngModel)]="contact.displayName" placeholder="Enter contact display text">
 
-      </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button *ngIf="!editFlag" type="button" class="btn btn-success" (click)="saveContact();c('Close click')">Add Contact</button>
-    <button *ngIf="editFlag" type="button" class="btn btn-success" (click)="saveContact();c('Close click')">Update Contact</button>
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="saveContact();c('Close click')">Add Contact</button>
+  <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+</div>
 </ng-template>

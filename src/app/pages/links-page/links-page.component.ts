@@ -5,15 +5,16 @@ import { NgModel } from '@angular/forms';
 import { LinkService } from '../../services/link.service';
 import { Link } from '../../model/Link';
 
+
 @Component({
   selector: 'app-links-page',
   templateUrl: './links-page.component.html',
   styleUrls: ['./links-page.component.css'],
   providers: [LinkService]
+
 })
 export class LinksPageComponent implements OnInit {
   links: Link[];
-  deleteMultipleList = {};
   delMul = false;
   editFlag = false;
   closeResult: string;
@@ -24,25 +25,16 @@ export class LinksPageComponent implements OnInit {
     description: '',
     tooltipText: ''
   };
-  constructor(
-    private linkService: LinkService,
-    private modalService: NgbModal
-  ) {}
+  constructor(private linkService: LinkService, private modalService: NgbModal) {
+  }
   openAddLink(content) {
-    this.link = new Link('', '', '', '');
     this.editFlag = false;
-    this.openModel(content);
+    this.modalService.open(content);
   }
   openEditLink(link: Link, content) {
     this.link = link;
     this.editFlag = true;
-    this.openModel(content);
-  }
-
-  openModel(content) {
-    this.modalService
-      .open(content)
-      .result.then(result => this.getLinks(), reason => this.getLinks());
+    this.modalService.open(content);
   }
 
   private getDismissReason(reason: any): string {
@@ -56,15 +48,14 @@ export class LinksPageComponent implements OnInit {
   }
 
   getLinks() {
-    this.linkService.getLinks().then((data: Link[]) => {
-      console.log(JSON.stringify(data));
+    this.linkService.getLinks().then((data: Link[]) => { console.log(JSON.stringify(data));
       this.links = data;
-    });
+     });
   }
 
   ngOnInit() {
     this.getLinks();
-  } /*
+  }/*
   openAddLink() {
     const modalRef = this.modalService.open(LinkModelComponent);
     const link1: Link = new Link('', '', '', '');
@@ -100,24 +91,17 @@ export class LinksPageComponent implements OnInit {
   }
   saveLink() {
     if (this.editFlag) {
-      this.linkService.updateLink(this.link);
+      this.linkService.updateLink(this.link).then((res: Link) => {
+        this.getLinks();
+      });
     } else {
       if (this.links === undefined) {
-        this.links = new Link[0]();
+        this.links = new Link[0];
       }
       this.link._id = this.links.length + 1;
-      this.linkService.addLink(this.link);
-    }
-  }
-  getdel() {
-    return JSON.stringify(this.deleteMultipleList);
-  }
-
-  deleteAllSelected() {
-    for (const i of this.links) {
-      if (this.deleteMultipleList[i._id]) {
-        this.deleteLink(i);
-      }
+      this.linkService.addLink(this.link).then((res: Link) => {
+        this.getLinks();
+      });
     }
   }
 }

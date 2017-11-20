@@ -13,9 +13,14 @@ export class LinkComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
   @Output()
   edit: EventEmitter<string> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<string> = new EventEmitter();
   ngOnInit() {
   }
   editLink() {
     this.edit.emit('edit');
+  }
+  deleteLink(link){
+    this.delete.emit(link);
   }
 }
