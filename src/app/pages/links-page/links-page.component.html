@@ -1,7 +1,7 @@
 
 <div class="row flex">
 <div class="col-12">
-  <input type="text" [(ngModel)]="userFilter" placeholder="name" (input)="filterItem(userFilter)">
+  <input type="text" [(ngModel)]="userFilter" placeholder="name" >
 </div>
     <div class="col-4 ">
       <button type="button" class="btn btn-primary btn-sm-block button" (click)="openAddLink(linkModal)" value="Add Link">Add Link</button>
@@ -19,10 +19,10 @@
 
   <div class="">
     <ul class="list-group flex" style="display:flex;flex-direction:row">
-      <li *ngFor="let l of filteredLinks" class="list-group-item col-4" >
+      <li *ngFor="let l of links| linkFilter : userFilter" class="list-group-item col-4" >
         <div class="">
           <div class="">
-            <app-link [link]="l" (edit)="openEditLink(l,linkModal)" (delete)="deleteLink(l)" (deleteSelected) ="deleteMultipleList[l._id] = $event.target.value" [delMul]="delMul" ></app-link>
+            <app-link [link]="l" (edit)="openEditLink(l,linkModal)" (delete)="deleteLink(l)" (deleteSelected) ="selectLink($event,l)" [delMul]="delMul" ></app-link>
 
           </div>
     <!--       <div class="col-2">

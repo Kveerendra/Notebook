@@ -17,9 +17,15 @@ export class LinkFilterPipe implements PipeTransform {
     return value;
   }*/
 
-  transform(items: any[], field: string, value: string): any[] {
+  transform(items: any[], searchText: string): any[] {
     if (!items) { return []; }
-    return items.filter(it => it[field] == value);
-  }
+    if (!searchText) { return items; }
+
+searchText = searchText.toLowerCase();
+
+return items.filter( it => {
+      return it.displayText.toLowerCase().includes(searchText);
+    });
+   }
 
 }

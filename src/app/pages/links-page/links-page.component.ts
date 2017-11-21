@@ -27,7 +27,7 @@ export class LinksPageComponent implements OnInit {
     description: '',
     tooltipText: ''
   };
-  deleteMultipleList: {};
+  deleteMultipleList= new Map<Link, boolean>();
   delMulFlag= false;
   constructor(private linkService: LinkService, private modalService: NgbModal) {
   }
@@ -57,9 +57,11 @@ export class LinksPageComponent implements OnInit {
 
      });
   }
-  selectLink(val: boolean, link: Link) {
+  selectLink(val: any, link: Link) {
     console.log( 'value is ' + val);
-    this.deleteMultipleList[link._id] = val;
+    console.log(val);
+
+    this.deleteMultipleList.set(link, val);
   }
   ngOnInit() {
     this.getLinks();
@@ -111,11 +113,19 @@ export class LinksPageComponent implements OnInit {
         this.getLinks();
       });
     }
-  }
+  }/*
   filterItem(searchString) {
     if (!searchString) {this.filteredItems = this.links; } //when nothing has typed
-    this.filteredItems = Object.assign([], this.links).filter(
+    this.filteredItems = Object.assign([], this.links.filter(
        link => link.displayText.toLowerCase().indexOf(searchString.toLowerCase()) > -1
-    );
+    ));
+  }*/
+  deleteAllSelected() {
+
+    for (const link of this.links) {
+        if (this.deleteMultipleList.get(link) ) {
+          this.deleteLink(link);
+        }
+    }
   }
 }
